@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block head %}
+    <title>OminiData{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='ico/favicon.ico')}}">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.css"> {% endblock %}
+    <style type="text/css">
+    #content {
+        padding-top: 100px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand" href="#">OminiData</a>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav ">
+                    <li class="activate"><a href="/">首页</a></li>
+                    <li><a href="#">统计</a></li>
+                    <li><a href="#">关于</a></li>
+                </ul>
+                {% block Login %}
+                <ul class="nav navbar-nav pull-right">
+                    {% if not session.logged_in %}
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Signup</a></li>
+                    {% else %}
+                    <li><a href="#">Logout</a></li>
+                    {% endif %}
+                </ul>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <div class="bs-docs-header" id="content">
+        <div class="container">
+            <table id="table" data-toggle="table" data-url='/v1/all' data-height="600" data-pagination="true" data-search="true">
+                <thead>
+                    <tr>
+                        <th data-field="id" data-align='center'>ID</th>
+                        <th data-field="time" data-align='center'>时间</th>
+                        <th data-field="field1" data-align='center'>字段1</th>
+                        <th data-field="field2" data-align='center'>字段2</th>
+                        <th data-field="field3" data-align='center'>字段3</th>
+                        <th data-field="field4" data-align='center'>字段4</th>
+                    </tr>
+                </thead>
+            </table>
+            <script type="text/javascript">
+            var $table = $('#table');
+            $(function() {});
+            </script>
+        </div>
+    </div>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/locale/bootstrap-table-zh-CN.min.js"></script>
+</body>
+
+</html>
